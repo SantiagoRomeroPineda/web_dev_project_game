@@ -1,2 +1,7 @@
-package com.javeriana.Game.service;public class PriceService {
+package com.javeriana.Game.service;
+import org.springframework.stereotype.Service;
+
+@Service
+public class PriceService {
+
 }

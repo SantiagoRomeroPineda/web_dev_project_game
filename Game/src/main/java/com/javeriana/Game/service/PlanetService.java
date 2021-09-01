@@ -1,2 +1,6 @@
-package com.javeriana.Game.service;public class PlanetService {
+package com.javeriana.Game.service;
+import org.springframework.stereotype.Service;
+
+@Service
+public class PlanetService {
 }
