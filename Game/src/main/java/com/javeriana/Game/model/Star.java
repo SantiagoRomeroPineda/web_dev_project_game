@@ -39,17 +39,17 @@ public class Star {
             inverseJoinColumns=@JoinColumn(name="star_of")
     )
     @JsonManagedReference
-    private List<Star> connectedStarOf;
+    private List<Star> connectedStarFrom;
 
     public Star() {}
 
-    public Star(Long starId, String starName, List<Planet> planets, Position position, List<Star> connectedStars, List<Star> connectedStarOf) {
+    public Star(Long starId, String starName, List<Planet> planets, Position position, List<Star> connectedStars, List<Star> connectedStarFrom) {
         this.starId = starId;
         this.starName = starName;
         this.planets = planets;
         this.position = position;
         this.connectedStars = connectedStars;
-        this.connectedStarOf = connectedStarOf;
+        this.connectedStarFrom = connectedStarFrom;
     }
 
     public List<Star> getConnectedStars() {
@@ -60,12 +60,12 @@ public class Star {
         this.connectedStars = connectedStars;
     }
 
-    public List<Star> getConnectedStarOf() {
-        return connectedStarOf;
+    public List<Star> getConnectedStarFrom() {
+        return connectedStarFrom;
     }
 
-    public void setConnectedStarOf(List<Star> connectedStarOf) {
-        this.connectedStarOf = connectedStarOf;
+    public void setConnectedStarFrom(List<Star> connectedStarFrom) {
+        this.connectedStarFrom = connectedStarFrom;
     }
 
     public Long getStarId() {
