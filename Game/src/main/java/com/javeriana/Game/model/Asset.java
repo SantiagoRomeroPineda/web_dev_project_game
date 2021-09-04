@@ -19,21 +19,20 @@ public class Asset {
     @Column(name= "asset_volume", columnDefinition = "Decimal(10,2) default '000.00'")
     private Long assetVolume;
 
-    @ManyToOne
-    @JoinColumn(name="team_id", nullable=false)
+    @ManyToMany
     @JsonManagedReference
-    private Team team;
+    private List<Team> teams  = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(name = "price", joinColumns = @JoinColumn(name="asset_id"), inverseJoinColumns = @JoinColumn(name="planet_id"))
     private List<Planet> planets = new ArrayList<>();
 
     public Asset() {}
-    public Asset(Long assetId, String assetName, Long assetVolume, Team team, List<Planet> planets) {
+    public Asset(Long assetId, String assetName, Long assetVolume, List<Team> teams, List<Planet> planets) {
         this.assetId = assetId;
         this.assetName = assetName;
         this.assetVolume = assetVolume;
-        this.team = team;
+        this.teams = teams;
         this.planets = planets;
     }
 
@@ -61,12 +60,12 @@ public class Asset {
         this.assetVolume = assetVolume;
     }
 
-    public Team getTeam() {
-        return team;
+    public List<Team> getTeams() {
+        return teams;
     }
 
-    public void setTeam(Team team) {
-        this.team = team;
+    public void setTeam(List<Team> teams) {
+        this.teams = teams;
     }
 
     public List<Planet> getPlanets() {

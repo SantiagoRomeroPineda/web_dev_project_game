@@ -1,5 +1,4 @@
 package com.javeriana.Game.model;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,8 +28,10 @@ public class Team {
     @OneToMany(mappedBy="team")
     private List<User> users =  new ArrayList<>();
 
-    @OneToMany(mappedBy="team")
+    @ManyToMany
+    @JoinTable(name = "assets_by_team", joinColumns = @JoinColumn(name="team_id"), inverseJoinColumns = @JoinColumn(name="asset_id"))
     private List<Asset> assets = new ArrayList<>();
+
 
     @OneToOne(cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
