@@ -1,7 +1,5 @@
 package com.javeriana.Game.model;
-
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "price")
