@@ -31,20 +31,20 @@ public class User {
     private UserRoles userRole;
 
     @ManyToOne
-    @JoinColumn(name="team_id", nullable=false)
+    @JoinColumn(name="team_id")
     @JsonManagedReference
     private Team team;
 
     public User() {
     }
 
-    public User(Long userId, String userName, String userDocument, String userPassword, UserRoles userRole, Team team) {
+    public User(Long userId, String userName, String userDocument, String userPassword, UserRoles userRole) {
         this.userId = userId;
         this.userName = userName;
         this.userDocument = userDocument;
         this.userPassword = userPassword;
         this.userRole = userRole;
-        this.team = team;
+
     }
 
 

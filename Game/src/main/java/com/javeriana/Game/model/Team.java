@@ -22,7 +22,7 @@ public class Team {
     private Long teamTimeGame;
 
     @ManyToOne
-    @JoinColumn(name="ship_id", nullable=false)
+    @JoinColumn(name="ship_id")
     private Ship ship;
 
     @OneToMany(mappedBy="team")
