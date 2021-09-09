@@ -19,7 +19,7 @@ public class PlanetService {
     }
 
     public List<Planet> findAllPlanets(){
-        return planetRepo.findAll();
+        return (List<Planet>) planetRepo.findAll();
     }
 
     public Planet updatePlanet(Planet planet) {

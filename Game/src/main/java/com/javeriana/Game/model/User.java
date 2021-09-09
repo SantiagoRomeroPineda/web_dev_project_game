@@ -15,25 +15,25 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name= "user_id")
-    private Long userId;
+    Long userId;
 
     @Column(name= "user_name")
-    private String userName;
+    String userName;
 
     @Column(name= "user_document",unique = true , nullable = false)
-    private String userDocument;
+    String userDocument;
 
     @Column(name= "user_password", nullable = false)
-    private String userPassword;
+    String userPassword;
 
     @Column(name= "user_role", nullable = false)
     @Enumerated(EnumType.STRING)
-    private UserRoles userRole;
+    UserRoles userRole;
 
     @ManyToOne
     @JoinColumn(name="team_id")
     @JsonManagedReference
-    private Team team;
+    Team team;
 
     public User() {
     }

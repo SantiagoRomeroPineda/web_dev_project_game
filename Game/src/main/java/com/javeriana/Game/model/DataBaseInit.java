@@ -22,8 +22,9 @@ import org.apache.commons.text.RandomStringGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.stereotype.Component;
 
-
+@Component
 public class DataBaseInit implements ApplicationRunner {
 
     private static final Team NULL = null;
@@ -68,7 +69,7 @@ public class DataBaseInit implements ApplicationRunner {
 
     final int NUM_SHIPS = 20;
     final int NUM_TEAMS = 10;
-    final int NUM_USER = 10;
+    final int NUM_USER = 100;
     final int NUM_ASSET = 500;
     final int NUM_STAR = 40000;
 
@@ -76,10 +77,10 @@ public class DataBaseInit implements ApplicationRunner {
     RandomStringGenerator randomGen = new RandomStringGenerator.Builder().withinRange('a', 'z')
             .usingRandom(random::nextInt).build();
 
-    
+            System.out.println("BASE DE DATOS------------------");
 
     for(
-    int i = 0;i<=10;i++)
+    int i = 0;i<NUM_USER;i++)
     {
 
         String name = randomGen.generate(5, 10);
@@ -89,10 +90,10 @@ public class DataBaseInit implements ApplicationRunner {
         UserRoles m = UserRoles.MERCHANT;
         UserRoles p = UserRoles.PILOT;
         UserRoles c = UserRoles.CAPTAIN;
-        if (i < 4) {
-            userService.addUser(new User((long) id, name, document, password, m));
+        if (i < 40) {
+            userRepository.save(new User((long) id, name, document, password, m));
             System.out.println("CREANDO");
-        } else if (i < 8) {
+        } else if (i < 80) {
             userRepository.save(new User((long) id, name, document, password, p));
         } else {
             userRepository.save(new User((long) id, name, document, password, c));
@@ -100,37 +101,28 @@ public class DataBaseInit implements ApplicationRunner {
 
     }
 
-    for(
-    int k = 0;k<=NUM_SHIPS;k++)
+    for(int j=0; j<NUM_SHIPS; j++)
     {
         String type = randomGen.generate(5, 10);
+        int id = random.nextInt(1000000);
         int speed = random.nextInt(1000000);
         int volume = random.nextInt(1000000);
-        java.util.List<Team> t;
-       // Ship s = new Ship((long)k, type, (long)speed, (long)volume, t);
-       // shipRepository.save(s);
+        
+        shipRepository.save(new Ship((long)id,type,(long)speed,(long)volume));
+
     }
     
-    for(
-    int j = 0;j<=NUM_TEAMS;j++)
+    for(int k=0;k<NUM_TEAMS;k++)
     {
 
+        int id = random.nextInt(1000000);   
         String name = randomGen.generate(5, 10);
-        int money = random.nextInt(1000000);
-        int id = random.nextInt(1000000);
-        int x = random.nextInt(1000000);
-        int y = random.nextInt(1000000);
-        int z = random.nextInt(1000000);
-        int time = random.nextInt(1000000);
-        Position p = new Position((long) id, (long) x, (long) y, (long) z, NULL, NULLP, NULLS);
-        Ship s = shipRepository.findById(Math.abs(random.nextLong()) % NUM_SHIPS + 1)
-        .orElseThrow();
-        java.util.List<Asset> assets;
-        java.util.List<User> u;
-        Team team = new Team((long) j, name, (long) money, (long) time,s, u, assets, p);
-        teamRepository.save(team);
+        int money = random.nextInt(1000000);  
+        int time = random.nextInt(1000000);  
+        teamRepository.save(new Team((long) id, name, (long)money, (long)time));
+
     }
 
     
-}
+ }
 }

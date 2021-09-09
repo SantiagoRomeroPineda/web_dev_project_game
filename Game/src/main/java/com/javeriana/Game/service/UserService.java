@@ -20,7 +20,7 @@ public class UserService {
     }
 
     public List<User> findAllUsers(){
-        return  userRepo.findAll();
+        return  (List<User>) userRepo.findAll();
     }
 
     public User updateUser(User user) {
@@ -35,7 +35,4 @@ public class UserService {
         return userRepo.findById(id).orElseThrow(() -> new UserNotFoundException("User not by id: " + id +" not found"));
     }
 
-    public User findUserByDocument(String document) {
-        return userRepo.findByUserDocument(document);
-    }
 }

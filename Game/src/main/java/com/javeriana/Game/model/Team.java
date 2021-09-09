@@ -10,44 +10,40 @@ public class Team {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name= "team_id")
-    private Long teamId;
+    Long teamId;
 
     @Column(name= "team_name")
-    private String teamName;
+    String teamName;
 
     @Column(name= "team_current_money" , columnDefinition = "Decimal(10,2) default '000.00'")
-    private Long teamCurrentMoney;
+    Long teamCurrentMoney;
 
     @Column(name= "team_time_game", columnDefinition = "Decimal(10,2) default '000.00'")
-    private Long teamTimeGame;
+    Long teamTimeGame;
 
     @ManyToOne
-    @JoinColumn(name="ship_id")
-    private Ship ship;
+    Ship ship;
 
     @OneToMany(mappedBy="team")
-    private List<User> users =  new ArrayList<>();
+    List<User> users =  new ArrayList<>();
 
     @ManyToMany
     @JoinTable(name = "assets_by_team", joinColumns = @JoinColumn(name="team_id"), inverseJoinColumns = @JoinColumn(name="asset_id"))
-    private List<Asset> assets = new ArrayList<>();
+    List<Asset> assets = new ArrayList<>();
 
 
     @OneToOne(cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
-    private Position position;
+    Position position;
 
     public Team() {}
 
-    public Team(Long teamId, String teamName, Long teamCurrentMoney, Long teamTimeGame, Ship ship, List<User> users, List<Asset> assets, Position position) {
+    public Team(Long teamId, String teamName, Long teamCurrentMoney, Long teamTimeGame) {
         this.teamId = teamId;
         this.teamName = teamName;
         this.teamCurrentMoney = teamCurrentMoney;
         this.teamTimeGame = teamTimeGame;
-        this.ship = ship;
-        this.users = users;
-        this.assets = assets;
-        this.position = position;
+     
     }
 
     public List<Asset> getAssets() {

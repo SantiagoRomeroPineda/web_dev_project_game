@@ -15,29 +15,28 @@ public class Ship  implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name= "ship_id")
-    private Long shipId;
+    Long shipId;
 
     @Column(name= "ship_type")
-    private String shipType;
+    String shipType;
 
     @Column(name= "speed")
-    private Long shipSpeed;
+    Long shipSpeed;
 
     @Column(name= "ship_volume")
-    private Long shipVolume;
+    Long shipVolume;
 
     @OneToMany(mappedBy="ship")
-    @JsonManagedReference
-    private List<Team> teams = new ArrayList<>();
+    List<Team> teams = new ArrayList<>();
 
     public Ship() {}
 
-    public Ship(Long shipId, String shipType, Long shipSpeed, Long shipVolume, List<Team> teams) {
+    public Ship(Long shipId, String shipType, Long shipSpeed, Long shipVolume) {
         this.shipId = shipId;
         this.shipType = shipType;
         this.shipSpeed = shipSpeed;
         this.shipVolume = shipVolume;
-        this.teams = teams;
+     
     }
 
     public Long getShipId() {

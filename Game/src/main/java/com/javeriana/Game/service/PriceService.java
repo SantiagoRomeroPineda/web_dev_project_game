@@ -19,7 +19,7 @@ public class PriceService {
     }
 
     public List<Price> findAllPrices() {
-        return priceRepo.findAll();
+        return (List<Price>) priceRepo.findAll();
     }
 
     public Price updatePrice(Price price) {

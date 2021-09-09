@@ -24,7 +24,7 @@ public class StarService {
     }
 
     public List<Star> findAllStars(){
-        return starRepo.findAll();
+        return (List<Star>) starRepo.findAll();
     }
 
     public Star updateStar(Star star) {
