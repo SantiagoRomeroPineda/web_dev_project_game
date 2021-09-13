@@ -31,7 +31,7 @@ public class Ship  implements Serializable {
 
     public Ship() {}
 
-    public Ship(Long shipId, String shipType, Long shipSpeed, Long shipVolume) {
+    public Ship(Long shipId, String shipType, Long shipSpeed, Long shipVolume ) {
         this.shipId = shipId;
         this.shipType = shipType;
         this.shipSpeed = shipSpeed;

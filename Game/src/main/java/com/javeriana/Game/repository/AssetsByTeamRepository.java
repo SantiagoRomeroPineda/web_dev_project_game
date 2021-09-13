@@ -3,10 +3,10 @@ import com.javeriana.Game.model.AssetsByTeam;
 import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 import org.springframework.stereotype.Repository;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 @Repository
-public interface AssetsByTeamRepository extends CrudRepository<AssetsByTeam, Long>{
+public interface AssetsByTeamRepository extends JpaRepository<AssetsByTeam, Long>{
 
     @Query(value = "SELECT * FROM assets_by_team where team_id = ?1 and asset_id = ?2 ", nativeQuery = true)
     AssetsByTeam findByTeamAndAsset(Long teamId, Long assetId);
