@@ -3,6 +3,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "asset")
@@ -19,21 +20,30 @@ public class Asset {
     @Column(name= "asset_volume", columnDefinition = "Decimal(10,2) default '000.00'")
     private Long assetVolume;
 
-    @ManyToMany
+    @OneToMany(mappedBy = "asset")
     @JsonManagedReference
-    private List<Team> teams  = new ArrayList<>();
+    Set<AssetsByTeam> teams;
 
-    @ManyToMany
-    @JoinTable(name = "price", joinColumns = @JoinColumn(name="asset_id"), inverseJoinColumns = @JoinColumn(name="planet_id"))
-    private List<Planet> planets = new ArrayList<>();
+    @OneToMany(mappedBy = "asset")
+    private List<Price> planets = new ArrayList<>();
 
     public Asset() {}
-    public Asset(Long assetId, String assetName, Long assetVolume, List<Team> teams, List<Planet> planets) {
+
+    public Asset(Long assetId, String assetName, Long assetVolume, Set<AssetsByTeam> teams, List<Price> planets) {
         this.assetId = assetId;
         this.assetName = assetName;
         this.assetVolume = assetVolume;
         this.teams = teams;
         this.planets = planets;
+    }
+
+
+    public Set<AssetsByTeam> getTeams() {
+        return teams;
+    }
+
+    public void setTeams(Set<AssetsByTeam> teams) {
+        this.teams = teams;
     }
 
     public Long getAssetId() {
@@ -60,19 +70,13 @@ public class Asset {
         this.assetVolume = assetVolume;
     }
 
-    public List<Team> getTeams() {
-        return teams;
-    }
 
-    public void setTeam(List<Team> teams) {
-        this.teams = teams;
-    }
 
-    public List<Planet> getPlanets() {
+    public List<Price> getPlanets() {
         return planets;
     }
 
-    public void setPlanets(List<Planet> planets) {
+    public void setPlanets(List<Price> planets) {
         this.planets = planets;
     }
 }

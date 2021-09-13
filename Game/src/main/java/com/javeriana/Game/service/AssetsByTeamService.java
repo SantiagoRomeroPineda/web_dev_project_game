@@ -20,7 +20,7 @@ public class AssetsByTeamService {
     }
 
     public List<AssetsByTeam> findAllAssetsByTeam() {
-        return assetsByTeamRepo.findAll();
+        return (List<AssetsByTeam>) assetsByTeamRepo.findAll();
     }
 
     public AssetsByTeam updateAssetsByTeam(AssetsByTeam assetsByTeam) {

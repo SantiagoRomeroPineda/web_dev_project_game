@@ -1,14 +1,14 @@
 package com.javeriana.Game.service;
-import com.javeriana.Game.model.Ship;
+//import com.javeriana.Game.model.Ship;
 import com.javeriana.Game.model.Team;
 import com.javeriana.Game.model.User;
 import com.javeriana.Game.repository.TeamRepository;
-import lombok.extern.slf4j.Slf4j;
+//import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Slf4j
+//@Slf4j
 @Service
 public class TeamService {
     private final TeamRepository teamRepo;
@@ -22,7 +22,7 @@ public class TeamService {
     }
 
     public List<Team> findAllTeams(){
-        return teamRepo.findAll();
+        return (List<Team>) teamRepo.findAll();
     }
 
     public Team updateTeam(Team team) {
@@ -35,7 +35,7 @@ public class TeamService {
 
     public User addUserToTeam(Team team, User user){
         team.getUsers().add(user);
-        log.info("New user named: {} with id {} added to the team {}",user.getUserName(), String.valueOf(user.getUserId()), team.getTeamName());
+        //log.info("New user named: {} with id {} added to the team {}",user.getUserName(), String.valueOf(user.getUserId()), team.getTeamName());
         teamRepo.save(team);
         return user;
     }

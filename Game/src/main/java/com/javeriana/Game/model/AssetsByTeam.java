@@ -15,9 +15,11 @@ public class AssetsByTeam {
     private int assetAmount;
 
     @ManyToOne
+    @JoinColumn(name = "asset_id")
     private Asset asset;
 
     @ManyToOne
+    @JoinColumn(name = "team_id")
     private Team team;
 
     public AssetsByTeam() {
