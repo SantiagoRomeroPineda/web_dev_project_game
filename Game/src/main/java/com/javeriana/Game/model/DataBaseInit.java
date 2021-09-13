@@ -9,7 +9,6 @@ import com.javeriana.Game.model.User.UserRoles;
 import com.javeriana.Game.repository.AssetRepository;
 import com.javeriana.Game.repository.AssetsByTeamRepository;
 import com.javeriana.Game.repository.PlanetRepository;
-import com.javeriana.Game.repository.PositionRepository;
 import com.javeriana.Game.repository.PriceRepository;
 import com.javeriana.Game.repository.ShipRepository;
 import com.javeriana.Game.repository.StarRepository;
@@ -43,9 +42,6 @@ public class DataBaseInit implements ApplicationRunner {
     PlanetRepository planetRepository;
 
     @Autowired
-    PositionRepository positionRepository;
-
-    @Autowired
     ShipRepository shipRepository;
 
     @Autowired
@@ -66,6 +62,8 @@ public class DataBaseInit implements ApplicationRunner {
     @Override
     @Transactional
     public void run(ApplicationArguments args) throws Exception {
+
+
 
     final int NUM_SHIPS = 20;
     final int NUM_TEAMS = 10;
@@ -119,10 +117,11 @@ public class DataBaseInit implements ApplicationRunner {
         String name = randomGen.generate(5, 10);
         int money = random.nextInt(1000000);  
         int time = random.nextInt(1000000);  
-        teamRepository.save(new Team((long) id, name, (long)money, (long)time));
+        //teamRepository.save(new Team((long) id, name, (long)money, (long)time));
 
     }
 
     
  }
+
 }

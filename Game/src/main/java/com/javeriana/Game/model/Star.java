@@ -22,9 +22,15 @@ public class Star {
     @JsonManagedReference
     private List<Planet> planets = new ArrayList<>();
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
-    private Position position;
+    @Column(name= "star_position_x", columnDefinition = "Decimal(10,5) default '000.00000'")
+    private Long starPositionX;
+
+    @Column(name= "star_position_y", columnDefinition = "Decimal(10,5) default '000.00000'")
+    private Long starPositionY;
+
+    @Column(name= "star_position_z", columnDefinition = "Decimal(10,5) default '000.00000'")
+    private Long starPositionZ;
+
 
     @ManyToMany
     @JoinTable(name="star_connection",
@@ -43,11 +49,13 @@ public class Star {
 
     public Star() {}
 
-    public Star(Long starId, String starName, List<Planet> planets, Position position, List<Star> connectedStars, List<Star> connectedStarFrom) {
+    public Star(Long starId, String starName, List<Planet> planets, Long starPositionX, Long starPositionY, Long starPositionZ, List<Star> connectedStars, List<Star> connectedStarFrom) {
         this.starId = starId;
         this.starName = starName;
         this.planets = planets;
-        this.position = position;
+        this.starPositionX = starPositionX;
+        this.starPositionY = starPositionY;
+        this.starPositionZ = starPositionZ;
         this.connectedStars = connectedStars;
         this.connectedStarFrom = connectedStarFrom;
     }
@@ -92,11 +100,27 @@ public class Star {
         this.planets = planets;
     }
 
-    public Position getPosition() {
-        return position;
+    public Long getStarPositionX() {
+        return starPositionX;
     }
 
-    public void setPosition(Position position) {
-        this.position = position;
+    public void setStarPositionX(Long starPositionX) {
+        this.starPositionX = starPositionX;
+    }
+
+    public Long getStarPositionY() {
+        return starPositionY;
+    }
+
+    public void setStarPositionY(Long starPositionY) {
+        this.starPositionY = starPositionY;
+    }
+
+    public Long getStarPositionZ() {
+        return starPositionZ;
+    }
+
+    public void setStarPositionZ(Long starPositionZ) {
+        this.starPositionZ = starPositionZ;
     }
 }

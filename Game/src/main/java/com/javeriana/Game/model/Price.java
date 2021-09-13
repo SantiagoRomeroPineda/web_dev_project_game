@@ -19,9 +19,11 @@ public class Price {
     private Long supplyFactor;
 
     @ManyToOne
+    @JoinColumn(name = "asset_id")
     private Asset asset;
 
     @ManyToOne
+    @JoinColumn(name = "planet_id")
     private Planet planet;
 
     public Price() {}

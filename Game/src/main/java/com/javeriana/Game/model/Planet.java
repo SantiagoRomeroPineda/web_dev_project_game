@@ -17,12 +17,9 @@ public class Planet {
     @Column(name= "planet_name")
     private String planetName;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
-    private Position position;
 
-    @ManyToMany
-    private List<Asset> assets =  new ArrayList<>();
+    @OneToMany(mappedBy = "planet")
+    private List<Price> assets = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name="star_id", nullable=false)
@@ -30,10 +27,9 @@ public class Planet {
 
     public Planet() {}
 
-    public Planet(Long planetId, String planetName, Position position, List<Asset> assets, Star star) {
+    public Planet(Long planetId, String planetName, List<Price> assets, Star star) {
         this.planetId = planetId;
         this.planetName = planetName;
-        this.position = position;
         this.assets = assets;
         this.star = star;
     }
@@ -54,19 +50,11 @@ public class Planet {
         this.planetName = planetName;
     }
 
-    public Position getPosition() {
-        return position;
-    }
-
-    public void setPosition(Position position) {
-        this.position = position;
-    }
-
-    public List<Asset> getAssets() {
+    public List<Price> getAssets() {
         return assets;
     }
 
-    public void setAssets(List<Asset> assets) {
+    public void setAssets(List<Price> assets) {
         this.assets = assets;
     }
 

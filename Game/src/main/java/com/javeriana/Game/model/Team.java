@@ -1,7 +1,10 @@
 package com.javeriana.Game.model;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "team")
@@ -21,45 +24,74 @@ public class Team {
     @Column(name= "team_time_game", columnDefinition = "Decimal(10,2) default '000.00'")
     Long teamTimeGame;
 
+    @Column(name= "team_position_x", columnDefinition = "Decimal(10,5) default '000.00000'")
+    private Long teamPositionX;
+
+    @Column(name= "team_position_y", columnDefinition = "Decimal(10,5) default '000.00000'")
+    private Long teamPositionY;
+
+    @Column(name= "team_position_z", columnDefinition = "Decimal(10,5) default '000.00000'")
+    private Long teamPositionZ;
+
     @ManyToOne
     Ship ship;
 
     @OneToMany(mappedBy="team")
     List<User> users =  new ArrayList<>();
 
-    @ManyToMany
-    @JoinTable(name = "assets_by_team", joinColumns = @JoinColumn(name="team_id"), inverseJoinColumns = @JoinColumn(name="asset_id"))
-    List<Asset> assets = new ArrayList<>();
+    @OneToMany(mappedBy="team")
+    @JsonManagedReference
+    Set<AssetsByTeam> assets;
 
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
-    Position position;
+
+
 
     public Team() {}
 
-    public Team(Long teamId, String teamName, Long teamCurrentMoney, Long teamTimeGame) {
+    public Team(Long teamId, String teamName, Long teamCurrentMoney, Long teamTimeGame, Long teamPositionX, Long teamPositionY, Long teamPositionZ, Ship ship, List<User> users, Set<AssetsByTeam> assets) {
         this.teamId = teamId;
         this.teamName = teamName;
         this.teamCurrentMoney = teamCurrentMoney;
         this.teamTimeGame = teamTimeGame;
-     
-    }
-
-    public List<Asset> getAssets() {
-        return assets;
-    }
-
-    public void setAssets(List<Asset> assets) {
+        this.teamPositionX = teamPositionX;
+        this.teamPositionY = teamPositionY;
+        this.teamPositionZ = teamPositionZ;
+        this.ship = ship;
+        this.users = users;
         this.assets = assets;
     }
 
-    public Position getPosition() {
-        return position;
+    public Long getTeamPositionX() {
+        return teamPositionX;
     }
 
-    public void setPosition(Position position) {
-        this.position = position;
+    public void setTeamPositionX(Long teamPositionX) {
+        this.teamPositionX = teamPositionX;
+    }
+
+    public Long getTeamPositionY() {
+        return teamPositionY;
+    }
+
+    public void setTeamPositionY(Long teamPositionY) {
+        this.teamPositionY = teamPositionY;
+    }
+
+    public Long getTeamPositionZ() {
+        return teamPositionZ;
+    }
+
+    public void setTeamPositionZ(Long teamPositionZ) {
+        this.teamPositionZ = teamPositionZ;
+    }
+
+    public Set<AssetsByTeam> getAssets() {
+        return assets;
+    }
+
+    public void setAssets(Set<AssetsByTeam> assets) {
+        this.assets = assets;
     }
 
     public List<User> getUsers() {
